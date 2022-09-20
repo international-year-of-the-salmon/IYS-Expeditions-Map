@@ -1,0 +1,131 @@
+vessel_name,date,station_no,lat,lon,start_time,sst,CTD,Bongo,Juday,Neuston,Tucker,Argo_float,Trawl,Trawl_duration,Gillnet,Longline,pink,chum,sockeye,Chinook,coho,steelhead,notes
+Bell M. Shimada,2022-03-04,28,45,-135,,9.5,X,X,,,,,X,2,,,0,0,0,0,0,0,2 hour tow and caught 1 small sardine
+Bell M. Shimada,2022-03-03,27,46,-135,,8.6,X,X,,,X,,X,1,,,0,2,0,0,0,0,"Caught, tagged and released a salmon shark"
+Bell M. Shimada,2022-03-01,26,46,-147,,8.8,X,X,,,,,X,1.5,,,2,2,0,1,5,0,
+Bell M. Shimada,2022-02-28,25,47,-147,,8,X,X,,,,,X,1.5,,,8,7,2,0,1,0,
+Bell M. Shimada,2022-02-27,22,47,-151.5,,7.5,X,X,,,X,,X,1.5,,,2,29,9,5,0,0,Biggest haul yet! 
+Bell M. Shimada,2022-02-05,2,47.35,-127.3,,,X,X,,,,,X,1,,,0,0,0,0,0,0,"fished near Cobb seamount;caught a nice daggertooth, a few jellies, and a bunch of salps but no salmon"
+Bell M. Shimada,2022-02-28,24,48,-147,,6.2,X,X,,,,,X,1,,,0,1,10,0,0,0,
+Bell M. Shimada,2022-02-26,21,48,-151.5,,7.2,X,X,,,X,,X,1,,,0,8,7,0,4,0,Dramatic jump in temp over previous station
+Bell M. Shimada,2022-02-28,23,49,-147,,6,X,X,,,X,,X,1.5,,,0,0,4,0,0,0,
+Bell M. Shimada,2022-02-26,20,49,-151.5,,5.8,X,X,,,,,X,1.5,,,1,11,1,0,0,0,Lots of myctophids for 1st time.
+Bell M. Shimada,2022-02-10,3,50,-147,,,X,X,,,,,X,,,,0,3,12,0,0,0,"First ""real"" station, got salmon!"
+Bell M. Shimada,2022-02-26,19,50,-151.5,,5.2,X,X,,,X,,X,0.5,,,0,1,4,0,0,0,Only did 1/2 hr tow because of tons of jellies (counted 95 in 5 min during Tucker trawl)
+Bell M. Shimada,2022-02-25,18,52,-147,,4.7,X,,,,,,X,1,,,0,0,7,0,0,0,
+Bell M. Shimada,2022-02-24,17,53,-147,,4.4,X,X,,,,,X,2,,,0,0,3,0,0,0,2 little 1 big sockeye
+Bell M. Shimada,2022-02-23,16,54,-147,,4.3,X,X,,,,,X,1.5,,,0,0,5,0,0,0,5 big sockeye.
+Bell M. Shimada,2022-02-22,15,55,-147,,4.2,X,X,,,X,,X,1,,,0,0,3,0,0,0,3 big sockeye.
+Bell M. Shimada,2022-02-15,4,55,-151.5,,3.5,X,,,,,,,,,,,,,,,,Too windy/wavy to fish or do bongo.
+Bell M. Shimada,2022-02-22,14,56,-147,,3.6,X,X,,,,,X,1.5,,,0,0,1,0,0,0,
+Bell M. Shimada,2022-02-15,5,56,-151.5,,3.5,X,,,,,,,,,,,,,,,,"1000m CTDs to measure Alaska stream, location is approximate"
+Bell M. Shimada,2022-02-15,6,56,-151.5,,3.5,X,,,,,,,,,,,,,,,,"1000m CTDs to measure Alaska stream, location is approximate"
+Bell M. Shimada,2022-02-15,7,56,-151.5,,3.5,X,,,,,,,,,,,,,,,,"1000m CTDs to measure Alaska stream, location is approximate"
+Bell M. Shimada,2022-02-15,8,56,-151.5,,3.5,X,,,,,,,,,,,,,,,,"1000m CTDs to measure Alaska stream, location is approximate"
+Bell M. Shimada,2022-02-15,9,56,-151.5,,3.5,X,,,,,,,,,,,,,,,,"1000m CTDs to measure Alaska stream, location is approximate"
+Bell M. Shimada,2022-02-15,10,56,-151.5,,3.5,X,X,,,,,X,1.5,,,0,0,0,0,0,0,"only caught 3 fried egg jellies and some pieces of water jelly, may have been too cold for salmon"
+Bell M. Shimada,2022-02-21,13,57,-147,,3.4,X,X,,,X,X,X,1,,,0,0,0,0,0,0,
+Bell M. Shimada,2022-02-16,11,57,-151,,3.5,X,X,,,X,X,X,1,,,0,0,0,0,0,0,"No salmon, caught Chrysaora jellies, a few squid."
+Bell M. Shimada,2022-02-21,12,58,-147,,3.8,X,X,,,,X,X,1.5,,,0,0,1,0,0,0,"1 small sockeye.  A few egg yolk jellies, small squid, other misc."
+Bell M. Shimada,2022-02-02,1,,,,,X,X,,,,,X,,,,0,0,0,0,0,0,"there was a large rip in the net, never closed codend"
+Northwest Explorer,2022-04-13,15,48.4812,-169.4229,,7.7,X,X,,,,,X,1,,,0,25,12,0,0,0,
+Northwest Explorer,2022-04-15,18,48.6787,-173.6731,,6.8,X,,,,,,X,1,,,8,76,9,0,0,0,
+Northwest Explorer,2022-04-12,14,48.8233,-167.2932,,7.7,X,X,,,,,X,1,,,0,8,28,0,0,0,
+Northwest Explorer,2022-04-06,6,49.1554,-165.1364,,5.6,X,X,,,,,X,1,,,2,32,11,0,0,0,midwater set at 402m
+Northwest Explorer,2022-04-14,17,49.1883,-171.5957,,8.6,X,,,,,,X,1,,,3,55,26,0,0,0,
+Northwest Explorer,2022-04-13,16,49.4847,-169.4403,,7.8,X,X,,,,,X,1,,,3,36,10,0,1,0,
+Northwest Explorer,2022-04-06,5,49.6414,-163.0358,,5.4,X,X,,,,,X,1,,,0,23,8,0,0,0,
+Northwest Explorer,2022-04-12,13,49.9028,-167.3188,,7.2,X,X,,,,,X,1,,,1,26,8,0,0,0,midwater set at 288m
+Northwest Explorer,2022-04-16,19,50.2106,-171.6221,,6.2,X,X,,,,,X,1,,,1,5,5,2,1,0,
+Northwest Explorer,2022-04-07,7,50.2246,-165.1921,,4.4,X,X,,,,,X,1,,,0,3,10,0,0,0,
+Northwest Explorer,2022-04-17,21,50.4611,-169.5177,,6.7,X,,,,,,X,1,,,0,2,3,0,0,0,
+Northwest Explorer,2022-04-05,4,50.6653,-163.0481,,5.1,X,X,,,,,X,1,,,0,1,2,0,0,0,
+Northwest Explorer,2022-04-11,12,50.8496,-167.3649,,8,X,X,,,,,X,1,,,0,11,12,0,0,0,
+Northwest Explorer,2022-04-07,8,51.1645,-165.2239,,4.2,X,X,,,,,X,1,,,0,3,8,0,0,0,
+Northwest Explorer,2022-04-16,20,51.2096,-171.5217,,6.5,X,X,,,,,X,1,,,1,19,36,0,1,0,
+Northwest Explorer,2022-04-18,22,51.5126,-169.5353,,7.7,X,,,,,,X,1,,,0,47,2,0,0,0,"Berrytheuthis anonychus (Okutania anonycha) 3,441 ind."
+Northwest Explorer,2022-04-04,3,51.7011,-163.1393,,4.4,X,X,,,,,X,1,,,0,3,8,0,0,0,
+Northwest Explorer,2022-04-11,11,51.8981,-167.2862,,4.6,X,X,,,,,X,1,,,0,1,8,0,0,0,
+Northwest Explorer,2022-04-08,9,52.1691,-165.2338,,3.5,X,X,,,,,X,1,,,0,0,0,0,0,0,
+Northwest Explorer,2022-04-04,2,52.6727,-163.1581,,3.6,X,X,,,,,X,1,,,0,8,17,0,0,0,
+Northwest Explorer,2022-04-08,10,53.3065,-165.3167,,4.5,X,X,,,,,X,1,,,0,0,0,0,0,0,midwater set at 235m
+Northwest Explorer,2022-04-03,1,53.6048,-163.0592,,4.2,X,X,,,,,X,1,,,0,0,0,0,0,0,
+Sir John Franklin,2022-03-01,13,46,-144,,8.8,X,X,,,X,X,X,1,,,0,0,0,0,0,0,
+Sir John Franklin,2022-02-23,4,47,-135,,7.8,X,X,,,X,,X,1,,,18,17,0,0,0,0,
+Sir John Franklin,2022-02-24,5,47,-138,,8.2,X,X,,,X,X,X,1,,,0,6,0,0,4,0,squid
+Sir John Franklin,2022-02-28,12,47,-141,,8,,,,,,,X,1,,,9,1,0,0,3,0,
+Sir John Franklin,2022-03-01,14,47,-144,,8.1,X,X,,,X,,X,1,,,0,1,0,0,1,0,
+Sir John Franklin,2022-02-23,3,48,-135,,7.5,X,X,,,X,,X,1,,,0,1,0,0,1,0,
+Sir John Franklin,2022-02-24,6,48,-138,,7.4,X,X,,,,,X,1,,,0,9,0,1,0,0,"jellyfish, boreal clubhook squid"
+Sir John Franklin,2022-02-28,11,48,-141,,7.7,X,X,,,X,,X,1,,,0,11,2,0,0,0,
+Sir John Franklin,2022-03-02,15,48,-144,,7,X,X,,,X,,X,1,,,0,1,1,2,2,0,
+Sir John Franklin,2022-02-22,2,49,-135,,7,X,X,,,X,,X,1,,,0,2,0,0,1,0,Ctenophores and myctophids
+Sir John Franklin,2022-02-26,7,49,-138,,6.8,X,X,,,X,,X,1,,,0,0,1,0,2,0,"jellyfish, norther sea nettle"
+Sir John Franklin,2022-02-27,10,49,-141,,7,X,X,,,X,,X,1,,,1,23,5,0,2,0,
+Sir John Franklin,2022-02-22,1,50,-135,,6.8,X,X,,,X,,X,1,,,0,0,0,0,0,0,Ctenophores
+Sir John Franklin,2022-02-26,8,50,-138,,6.6,X,X,,,X,,X,1,,,0,0,7,0,0,0,"1 black rockfish, ctenophores, northern sea nettle, smallfin squid, myctophids"
+Sir John Franklin,2022-02-27,9,50,-141,,6.7,X,X,,,X,,X,1,,,1,0,5,0,0,0,
+Sir John Franklin,2022-03-19,35,51,-132,8:15,7.1,X,X,,,X,,X,1,,,0,0,0,0,0,0,"fried egg, moon jelly"
+Sir John Franklin,2022-03-06,22,51,-135,,7.1,X,X,,,X,,X,1,,,0,0,0,0,0,0,blue lanternfish
+Sir John Franklin,2022-03-03,16,51,-141,,5.7,X,X,,,X,,X,1,,,0,0,25,0,0,0,
+Sir John Franklin,2022-03-06,21,52,-135,,6.8,X,X,,,X,,X,1,,,4,0,1,1,0,0,
+Sir John Franklin,2022-03-05,20,52,-138,,6.3,X,X,,,X,,X,1,,,0,0,6,0,0,0,blue lanternfish
+Sir John Franklin,2022-03-04,17,52,-141,,5.5,X,X,,,X,,X,1,,,0,3,7,0,0,0,
+Sir John Franklin,2022-03-09,23,53,-135,23:58,6.5,X,X,,,X,,X,1,,,0,0,1,0,0,0,"Tarletonbeania crenularis (~1000), opalescent inshore, euphausiid"
+Sir John Franklin,2022-03-05,19,53,-138,,6.1,X,X,,,X,,X,1,,,0,1,1,0,0,0,
+Sir John Franklin,2022-03-04,18,53,-141,,5.2,X,X,,,X,,X,1,,,0,2,2,0,0,0,
+Sir John Franklin,2022-03-16,34,53,-144,9:15,5.2,X,X,,,X,X,X,1,,,0,0,9,0,0,0,"sea nettles, fried egg, moon jelly; bimodal size distribution for sockeye (multiple age classes?)"
+Sir John Franklin,2022-03-11,25,54,-138,3:05,5.95,X,X,,,X,,X,1,,,0,2,3,0,0,0,"daggerfish, sea nettles, fried egg, CA headlamp, blue lanternfish, northern lanternfish"
+Sir John Franklin,2022-03-11,26,54,-141,16:30,5.3,X,X,,,X,,X,1,,,0,0,0,0,0,0,"~300 sticklebacks, daggerfish, sea nettles, fried egg"
+Sir John Franklin,2022-03-15,33,54,-144,16:45,4.7,X,X,,,X,,X,1,,,0,0,1,0,0,0,"daggertooth, sea nettles"
+Sir John Franklin,2022-03-10,24,55,-138,16:45,6.1,X,X,,,X,X,X,1,,,0,1,0,0,0,0,"jellyfish, sea nettle, squid"
+Sir John Franklin,2022-03-12,27,55,-141,8:50,5.2,X,X,,,X,,X,1,,,0,0,2,0,0,0,"~300 sticklebacks, sea nettles, fried egg"
+Sir John Franklin,2022-03-15,32,55,-144,3:25,4.8,X,X,,,X,X,X,1,,,0,0,5,0,0,0,"clubhook squid, sea nettles, fried egg jelly"
+Sir John Franklin,2022-03-12,28,56,-141,19:40,4.2,X,X,,,X,,X,1,,,0,0,1,0,0,0,"sea nettles, krill"
+Sir John Franklin,2022-03-14,31,56,-144,18:50,4.4,X,X,,,X,,X,1,,,0,0,0,0,0,0,~2500 sticklebacks
+Sir John Franklin,2022-03-13,29,57,-141,8:30,5.3,X,X,,,X,,,,,,,,,,,,station not fished due to weather
+Sir John Franklin,2022-03-14,30,57,-144,8:45,4.1,X,X,,,X,X,X,1,,,0,2,0,0,0,0,"~50 sticklebacks, sea nettles, Boreoteuthis borealis"
+TINRO,2022-03-05,7,45.4,-167.2317,22:19,8.2,X,X,X,X,,,X,1,,,0,0,0,0,1,0,
+TINRO,2022-03-05,6,45.47,-168.4617,13:57,5.2,X,X,X,X,,,X,1,,,0,0,0,0,0,0,
+TINRO,2022-03-05,5,46.29,-169.3867,4:30,7.5,X,X,X,X,,,X,1,,,0,0,0,0,1,0,
+TINRO,2022-03-06,8,46.42,-167.2117,6:44,7.8,X,X,X,X,,,X,1,,,0,1,0,0,1,0,
+TINRO,2022-03-16,25,46.92,-160.905,17:40,7.2,X,X,X,X,,,X,1,,,0,2,10,0,3,0,Tarletonbeania crenularis - 10 ind
+TINRO,2022-03-04,4,47.14,-170.2,18:23,6.7,X,X,X,X,,,X,1,,,0,0,3,0,4,0,lots of salps
+TINRO,2022-03-06,9,47.53,-167.2783,16:36,6.4,X,X,X,X,,,X,1,,,2,1,0,2,0,0,"Okutania anonycha - 997 ind, 1 armhook squid, 1 Gonatus kamtschaticus"
+TINRO,2022-03-15,24,47.54,-158.33,8:47,7.1,X,X,X,X,,,X,1,,,0,6,2,0,0,0,
+TINRO,2022-03-17,26,47.88,-160.84,5:41,6.5,X,X,X,X,,,X,1,,,11,57,64,0,2,0,
+TINRO,2022-03-03,3,47.89,-169.4333,13:23,5.9,X,X,X,X,,,X,1,,,1,2,2,0,1,0,
+TINRO,2022-03-03,2,47.91,-171.1133,2:58,5.9,X,,X,X,,,X,1,,,1,0,9,0,5,0,
+TINRO,2022-03-20,31,48.14,-165.1433,0:16,6.2,X,X,X,X,,,X,1,,,1,0,3,0,1,0,"Lamna Ditropis! (Male, 177 cm, ~65kg)"
+TINRO,2022-03-15,23,48.45,-158.35,23:29,6.2,X,X,X,X,,,X,1,,,0,0,19,0,0,0,Fried egg jelly - 85 kg
+TINRO,2022-03-07,10,48.56,-167.2783,1:30,6.1,X,X,X,X,,,X,1,,,1,3,46,0,2,0,"Tarletonbeania crenularis (108 ), 3 armhook squids, 9 Boreoteuthis borealis"
+TINRO,2022-03-19,30,48.61,-162.9933,11:20,5.5,X,X,X,X,,,X,1,,,0,0,6,0,1,0,
+TINRO,2022-03-02,1,48.63,-172.315,16:10,5.2,X,X,X,X,,,X,1,,,0,0,2,1,1,0,
+TINRO,2022-03-12,20,48.83,-155.9283,18:18,6.1,X,X,X,X,,,X,1,,,0,3,1,0,3,0,
+TINRO,2022-03-17,27,48.86,-160.8433,15:45,5.7,X,X,X,X,,,X,1,,,1,0,3,0,1,0,
+TINRO,2022-03-07,11,49.07,-169.065,11:40,5.7,X,X,X,X,,,X,1,,,0,1,0,0,0,0,
+TINRO,2022-03-20,32,49.14,-165.1467,14:52,5.4,X,X,X,X,,,X,1,,,0,2,2,0,0,0,
+TINRO,2022-03-14,22,49.52,-158.5033,14:17,6.1,X,X,X,X,,,X,1,,,0,2,24,0,0,0,
+TINRO,2022-03-08,12,49.52,-167.3617,0:29,5.4,X,X,X,X,,,X,1,,,0,10,12,0,0,0,"Tarletonbeania crenularis (128 ), 13 armhook squids, 1 Boreoteuthis borealis"
+TINRO,2022-03-19,29,49.62,-163.0067,2:40,5.8,X,X,X,X,,,X,1,,,1,0,3,0,1,0,
+TINRO,2022-03-18,28,49.88,-160.9017,4:24,5.4,X,X,X,X,,,X,1,,,0,0,7,0,1,0,Okutania anonycha - 647 ind
+TINRO,2022-03-12,19,49.89,-155.9633,6:52,5.5,X,X,X,X,,,X,1,,,0,0,2,0,0,0,"Fried egg jelly - 72 kg, salps - 0.2 kg"
+TINRO,2022-03-08,13,50.07,-165.1867,15:12,5.6,X,X,X,X,,,X,1,,,12,22,649,0,0,0,The highest catch of salmon within all winter expeditions since 1986!!!! Threespine stickleback - 280 individuals. We observed thin (5-7 m) layer of lower salinity at this station which is unususal at this region. Neuston net catch also had larvae of Pleurogrammus monopterygius.
+TINRO,2022-03-13,21,50.44,-158.415,12:37,4.6,X,X,X,X,,,X,1,,,0,0,1,0,0,0,
+TINRO,2022-03-09,14,50.56,-163.01,4:21,5.4,X,X,X,X,,,X,1,,,0,1,4,0,2,0,Okutania anonycha - 297 ind
+TINRO,2022-03-09,15,50.86,-160.9683,15:46,4.7,X,X,X,X,,,X,1,,,0,11,23,1,0,0,"Okutania anonycha - 89 ind, Chrysaora melanaster - 38.5 kg"
+TINRO,2022-03-11,18,50.94,-155.975,15:03,5.3,X,X,X,X,,,X,1,,,0,0,4,1,0,0,Gasterosteus aculeatus - 10 ind.
+TINRO,2022-03-10,16,51.29,-158.425,6:55,4.6,X,X,X,X,,,X,1,,,1,0,0,0,0,0,Chrysaora melanaster - 41.5 kg
+TINRO,2022-03-10,17,51.91,-156.0267,20:45,4.7,X,X,X,X,,,X,1,,,0,2,10,0,0,0,Gasterosteus aculeatus - 54 ind.
+Raw Spirit,,,45,-135,,,,,,,,,,,X,X,,,,,,,
+Raw Spirit,,,46,-135,,,,,,,,,,,X,X,,,,,,,
+Raw Spirit,,,46,-138,,,,,,,,,,,X,X,,,,,,,
+Raw Spirit,,,47,-135,,,,,,,,,,,X,X,,,,,,,
+Raw Spirit,,,47,-138,,,,,,,,,,,X,X,,,,,,,
+Raw Spirit,,,47,-141,,,,,,,,,,,X,X,,,,,,,
+Raw Spirit,,,48,-133,,,,,,,,,,,X,X,,,,,,,
+Raw Spirit,,,48,-135,,,,,,,,,,,X,X,,,,,,,
+Raw Spirit,,,48,-138,,,,,,,,,,,X,X,,,,,,,
+Raw Spirit,,,48,-141,,,,,,,,,,,X,X,,,,,,,
+Raw Spirit,,,49,-135,,,,,,,,,,,X,X,,,,,,,
+Raw Spirit,,,49,-141,,,,,,,,,,,X,X,,,,,,,
+Raw Spirit,,,50,-138,,,,,,,,,,,X,X,,,,,,,

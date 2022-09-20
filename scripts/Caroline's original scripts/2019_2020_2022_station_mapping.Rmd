@@ -1,0 +1,445 @@
+---
+title: "2019_2020_2022_station_mapping"
+output: html_document
+---
+
+In this code I map the 2019, 2020 and 2022 IYS Expedition stations. 
+
+#Importing packages and data
+
+```{r}
+
+#Importing packages
+
+ipak <- function(pkg){
+    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+    if (length(new.pkg)) 
+        install.packages(new.pkg, dependencies = TRUE)
+    sapply(pkg, require, character.only = TRUE)
+}
+
+packages <- c("tidyverse", "ggplot2", "here", "tibble", "janitor", "lubridate", "data.table",  "plyr", "gridExtra", "DataCombine", "textclean", "mapdata", "mapproj", "grid", "RColorBrewer", "cowplot")
+
+ipak(packages)
+
+#importing station data
+station_data <- read.csv(here::here("Data_files", "2019_2020_and_planned_2022_stations_Mar312022.csv"))
+
+#importing results data
+results <- read.csv(here::here("Data_files", "2022_completed_stations_May42022.csv"))
+
+raw_spirit_stations <- results |> 
+  filter(vessel_name == "Raw Spirit")
+
+write_csv(raw_spirit_stations, "planned_raw_spirit_stations.csv")
+```
+
+#Mapping planned stations for 2019, 2020 and 2022
+
+```{r}
+
+#convert year column to character values
+station_data$year <- as.character(station_data$year)
+
+#fixing the lon values so they can be plotted on a scale from 0 to 360 degrees
+station_data$lon[station_data$lon<0] = station_data$lon[station_data$lon<0] + 360
+
+#North Pacific map
+pacific_map <- map_data("world2")
+
+#mapping stations
+station_map <- ggplot() + geom_polygon(data = pacific_map, aes(x= long, y = lat, group = group), fill = 8, color = "black") +
+  coord_cartesian(xlim = c(137, 241), ylim = c(39, 75), expand = F) + 
+  scale_x_continuous(breaks = c(140, 160, 180, 200, 220, 240), labels = c("140°E", "160°E", "180°", "-160°W", "-140°W", "-120°W")) +
+  scale_y_continuous(breaks = c(40, 50, 60, 70), labels = c("40°N", "50°N", "60°N", "70°N")) +
+  geom_point(data=station_data, aes(x=lon, y=lat, colour = year), size = 0.5) +
+  theme_bw() + 
+  theme(panel.grid.major = element_line(colour = "transparent"), panel.grid.minor = element_line(colour = "transparent")) + 
+  xlab("Longitude") + 
+  ylab("Latitude") +
+  theme(text=element_text(size=12))
+station_map
+
+ggsave(here::here("Figures", "2019_2020_2022_expeditions_station_map.pdf"), station_map, width =190, height =100, units = "mm")
+
+```
+
+# Mapping planned stations by vessel for 2022
+
+```{r}
+
+station_data_2022 <- station_data %>% filter (year == 2022)
+
+#mapping stations
+station_map <- ggplot() + geom_polygon(data = pacific_map, aes(x= long, y = lat, group = group), fill = 8, color = "black") +
+  coord_cartesian(xlim = c(137, 241), ylim = c(39, 75), expand = F) + 
+  scale_x_continuous(breaks = c(140, 160, 180, 200, 220, 240), labels = c("140°E", "160°E", "180°", "-160°W", "-140°W", "-120°W")) +
+  scale_y_continuous(breaks = c(40, 50, 60, 70), labels = c("40°N", "50°N", "60°N", "70°N")) +
+  geom_point(data=station_data_2022, aes(x=lon, y=lat, color = vessel, shape = vessel), size = 0.8) +
+  theme_bw() + 
+  theme(panel.grid.major = element_line(colour = "transparent"), panel.grid.minor = element_line(colour = "transparent")) + 
+  xlab("Longitude") + 
+  ylab("Latitude") +
+  theme(text=element_text(size=12))
+station_map
+
+ggsave(here::here("Figures", "2022_expeditions_station_map_vessel.pdf"), station_map, width =190, height =100, units = "mm")
+
+```
+#Mapping planned stations by zone for 2022
+
+```{r}
+
+station_data_2022 <- station_data %>% filter (year == 2022)
+
+#mapping stations
+station_map <- ggplot() + geom_polygon(data = pacific_map, aes(x= long, y = lat, group = group), fill = 8, color = "black") +
+  coord_cartesian(xlim = c(137, 241), ylim = c(39, 75), expand = F) + 
+  scale_x_continuous(breaks = c(140, 160, 180, 200, 220, 240), labels = c("140°E", "160°E", "180°", "-160°W", "-140°W", "-120°W")) +
+  scale_y_continuous(breaks = c(40, 50, 60, 70), labels = c("40°N", "50°N", "60°N", "70°N")) +
+  geom_point(data=station_data_2022, aes(x=lon, y=lat, color = zone), size = 0.8) +
+  theme_bw() + 
+  theme(panel.grid.major = element_line(colour = "transparent"), panel.grid.minor = element_line(colour = "transparent")) + 
+  xlab("Longitude") + 
+  ylab("Latitude") +
+  theme(text=element_text(size=12))
+station_map
+
+ggsave(here::here("Figures", "2022_expeditions_station_map_zone.pdf"), station_map, width =190, height =100, units = "mm")
+
+```
+
+#Mapping actual stations by vessel for 2022
+
+```{r}
+
+#convert date column to date values (instead of character)
+results$date <- as.Date(results$date)
+
+#remove rows that do not have lat and lon values
+results_no_NA <- results %>% 
+  filter(!is.na(lat)) %>% 
+  filter(!is.na(lon))
+
+#fixing the lon values so they can be plotted on a scale from 0 to 360 degrees
+results_no_NA$lon[results_no_NA$lon<0] = results_no_NA$lon[results_no_NA$lon<0] + 360
+
+#make a column for total number of salmon caught
+results_tot_salmon <- results_no_NA %>% 
+  group_by(vessel_name, station_no) %>%
+  dplyr::mutate(total_salmon = sum(pink, chum, sockeye, Chinook, coho, steelhead, na.rm = TRUE))
+
+#make a column for if they caught salmon (yes or no)
+results_TF_salmon <- results_tot_salmon %>% 
+  mutate(salmon_caught = ifelse(total_salmon>0, 'yes', 'no'))
+
+#sorting by fishing stations
+fishing_stns_sort <- results_TF_salmon %>% 
+  filter(Trawl == 'X' | Gillnet == 'X' | Longline == 'X')
+
+#make a column for gear type
+fishing_stns <- fishing_stns_sort %>% 
+  mutate(gear_type = ifelse(Trawl=="X", 'trawl', 'gillnet & longline'))
+
+#plotting fishing stations
+fishing_stns_plot <- ggplot() + geom_polygon(data = pacific_map, aes(x= long, y = lat, group = group), fill = 8, color = "black") +
+  coord_cartesian(xlim = c(170, 241), ylim = c(42, 63), expand = F) +
+  scale_x_continuous(breaks = c(180, 200, 220, 240), labels = c("180°", "160°W", "140°W", "120°W")) +
+  scale_y_continuous(breaks = c(45, 50, 55, 60), labels = c("45°N", "50°N", "55°N", "60°N")) +
+  geom_point(data=fishing_stns, aes(x=lon, y=lat, color = vessel_name, shape = gear_type)) +
+  theme_bw() + 
+  theme(panel.grid.major = element_line(colour = "transparent"), panel.grid.minor = element_line(colour = "transparent")) + 
+  xlab("Longitude") + 
+  ylab("Latitude") +
+  ggtitle("A) Fishing Stations") +
+  theme(text=element_text(size=12)) +
+  scale_shape_manual(values=c(8, 19)) +
+  scale_color_manual(values=c("#000000", "#E69F00", "#56B4E9", "#CC79A7", "#0072B2"))
+fishing_stns_plot
+
+#save fishing stations plot
+ggsave(here::here("Figures", "2022_fishing_stations.pdf"), fishing_stns_plot, width =320, height =200, units = "mm")
+
+#sorting by CTD stations
+ctd_stns <- results_TF_salmon %>% 
+  filter(CTD =='X')
+
+#plotting CTD stations
+ctd_stns_plot <- ggplot() + geom_polygon(data = pacific_map, aes(x= long, y = lat, group = group), fill = 8, color = "black") +
+  coord_cartesian(xlim = c(170, 241), ylim = c(42, 63), expand = F) +
+  scale_x_continuous(breaks = c(180, 200, 220, 240), labels = c("180°", "160°W", "140°W", "120°W")) +
+  scale_y_continuous(breaks = c(45, 50, 55, 60), labels = c("45°N", "50°N", "55°N", "60°N")) +
+  #geom_point(data=station_data_2022, aes(x=lon, y=lat), size = 0.8, shape = 1) +
+  geom_point(data=ctd_stns, aes(x=lon, y=lat, color = vessel_name)) +
+  theme_bw() + 
+  theme(panel.grid.major = element_line(colour = "transparent"), panel.grid.minor = element_line(colour = "transparent")) + 
+  xlab("Longitude") + 
+  ylab("Latitude") +
+  ggtitle("B) CTD Stations") +
+  theme(text=element_text(size=12)) +
+  scale_color_manual(values=c("#000000", "#E69F00", "#CC79A7", "#0072B2"))
+ctd_stns_plot
+
+#plotting zooplankton gear stations
+zoop_stns <- results_TF_salmon %>% 
+  filter(Bongo =='X'| Juday == 'X' | Tucker == 'X')
+
+#plotting zooplankton gear stations
+zoop_stns_plot <- ggplot() + geom_polygon(data = pacific_map, aes(x= long, y = lat, group = group), fill = 8, color = "black") +
+  coord_cartesian(xlim = c(170, 241), ylim = c(42, 63), expand = F) +
+  scale_x_continuous(breaks = c(180, 200, 220, 240), labels = c("180°", "160°W", "140°W", "120°W")) +
+  scale_y_continuous(breaks = c(45, 50, 55, 60), labels = c("45°N", "50°N", "55°N", "60°N")) +
+  #geom_point(data=station_data_2022, aes(x=lon, y=lat), size = 0.8, shape = 1) +
+  geom_point(data=zoop_stns, aes(x=lon, y=lat, color = vessel_name)) +
+  theme_bw() + 
+  theme(panel.grid.major = element_line(colour = "transparent"), panel.grid.minor = element_line(colour = "transparent")) + 
+  xlab("Longitude") + 
+  ylab("Latitude") +
+  ggtitle("C) Zooplankton Stations") + 
+  theme(text=element_text(size=12)) +
+  scale_color_manual(values=c("#000000", "#E69F00", "#CC79A7", "#0072B2"))
+zoop_stns_plot
+
+#making multi-panel plot
+grid.arrange(fishing_stns_plot, ctd_stns_plot, zoop_stns_plot)
+completed_stations_multipanel <- arrangeGrob(fishing_stns_plot, ctd_stns_plot, zoop_stns_plot, nrow = 3)
+ggsave(here::here("Figures", "2022_expedition_completed_stations.pdf"), completed_stations_multipanel, width =200, height =250, units = "mm")
+
+```
+
+#Mapping completed stations (as of Mar 29) with NW Explorer planned stations
+
+```{r}
+
+#plotting fishing stations
+complete_stn_plot_nwexplore <- ggplot() + geom_polygon(data = pacific_map, aes(x= long, y = lat, group = group), fill = 8, color = "black") +
+  coord_cartesian(xlim = c(170, 241), ylim = c(42, 63), expand = F) +
+  scale_x_continuous(breaks = c(180, 200, 220, 240), labels = c("180°", "160°W", "140°W", "120°W")) +
+  scale_y_continuous(breaks = c(45, 50, 55, 60), labels = c("45°N", "50°N", "55°N", "60°N")) +
+  geom_point(data=results_no_NA, aes(x=lon, y=lat, color = vessel_name), size = 2, shape = 16) +
+  theme_bw() + 
+  theme(panel.grid.major = element_line(colour = "transparent"), panel.grid.minor = element_line(colour = "transparent")) + 
+  xlab("Longitude") + 
+  ylab("Latitude") +
+  theme(text=element_text(size=14))
+complete_stn_plot_nwexplore
+
+#save fishing stations plot
+ggsave(here::here("Figures", "2022_completed_fishing_stations.pdf"), complete_stn_plot_nwexplore, width =300, height =120, units = "mm")
+
+```
+
+#Mapping CPUE by vessel and species for 2022
+
+```{r}
+
+#calculating CPUE by spp
+
+  #if there is no trawl time, then I assume the time is 1 hour
+fishing_stns$Trawl_duration[is.na(fishing_stns$Trawl_duration)] <-  1.0
+fishing_stns_cpue <- fishing_stns %>%  
+  mutate(pink_cpue = pink/Trawl_duration) %>%  
+  mutate(chum_cpue = chum/Trawl_duration) %>% 
+  mutate(sockeye_cpue = sockeye/Trawl_duration) %>% 
+  mutate(Chinook_cpue = Chinook/Trawl_duration) %>% 
+  mutate(coho_cpue = coho/Trawl_duration) %>% 
+  mutate(steelhead_cpue = steelhead/Trawl_duration)
+
+#sorting by chum and sorting by stns that caught 0 chum
+fishing_stns_chum <- fishing_stns_cpue %>% 
+  filter(chum > 0 & chum_cpue < 80)
+  
+fishing_stns_chum_0 <- fishing_stns_cpue %>% 
+  filter(chum == 0)
+
+#filtering out stns where cpue > 80
+fishing_stns_chum_80_plus <- fishing_stns_cpue %>% 
+  filter(chum_cpue > 80)
+
+#plotting chum stations
+fishing_stns_chum_plot <- ggplot() + geom_polygon(data = pacific_map, aes(x= long, y = lat, group = group), fill = 8, color = "black") +
+  coord_cartesian(xlim = c(170, 241), ylim = c(42, 63), expand = F) +
+  scale_x_continuous(breaks = c(180, 200, 220, 240), labels = c("180°", "160°W", "140°W", "120°W")) +
+  scale_y_continuous(breaks = c(45, 50, 55, 60), labels = c("45°N", "50°N", "55°N", "60°N")) +
+  #geom_point(data=station_data_2022, aes(x=lon, y=lat), size = 0.8, shape = 1) +
+  geom_point(data=fishing_stns_chum, aes(x=lon, y=lat, color = vessel_name, size = chum_cpue)) +
+  geom_point(data=fishing_stns_chum_0, aes(x=lon, y=lat, color = vessel_name), shape = 4, size = 3, show.legend = FALSE) +
+  geom_point(data=fishing_stns_chum_80_plus, aes(x=lon, y=lat, color = vessel_name), shape = 17, size = 4, show.legend = FALSE) +
+  theme_bw() + 
+  theme(panel.grid.major = element_line(colour = "transparent"), panel.grid.minor = element_line(colour = "transparent")) + 
+  xlab("Longitude") + 
+  ylab("Latitude") +
+  ggtitle("Chum") +
+  theme(text=element_text(size=12)) +
+  scale_size(range=c(1,5), breaks=c(0.5, 20, 40, 60, 80), limits = c(0.5, 80) , guide="legend") +
+  guides(size = guide_legend(order = 1),col = guide_legend(order = 2))
+fishing_stns_chum_plot
+
+ggsave(here::here("Figures", "2022_chum_catch.jpg"), fishing_stns_chum_plot, width =200, height =110, units = "mm")
+
+#sorting by pink and sorting by stns that caught 0 pink
+fishing_stns_pink <- fishing_stns_cpue %>% 
+  filter(pink > 0 & pink_cpue < 80)
+  
+fishing_stns_pink_0 <- fishing_stns_cpue %>% 
+  filter(pink == 0)
+
+#filtering out stns where cpue > 80
+fishing_stns_pink_80_plus <- fishing_stns_cpue %>% 
+  filter(pink_cpue > 80)
+
+#plotting pink stations
+fishing_stns_pink_plot <- ggplot() + geom_polygon(data = pacific_map, aes(x= long, y = lat, group = group), fill = 8, color = "black") +
+  coord_cartesian(xlim = c(170, 241), ylim = c(42, 63), expand = F) +
+  scale_x_continuous(breaks = c(180, 200, 220, 240), labels = c("180°", "160°W", "140°W", "120°W")) +
+  scale_y_continuous(breaks = c(45, 50, 55, 60), labels = c("45°N", "50°N", "55°N", "60°N")) +
+  #geom_point(data=station_data_2022, aes(x=lon, y=lat), size = 0.8, shape = 1) +
+  geom_point(data=fishing_stns_pink, aes(x=lon, y=lat, color = vessel_name, size = pink_cpue)) +
+  geom_point(data=fishing_stns_pink_0, aes(x=lon, y=lat, color = vessel_name), shape = 4, size = 3, show.legend = FALSE) +
+  geom_point(data=fishing_stns_pink_80_plus, aes(x=lon, y=lat, color = vessel_name), shape = 17, size = 4, show.legend = FALSE) +
+  theme_bw() + 
+  theme(panel.grid.major = element_line(colour = "transparent"), panel.grid.minor = element_line(colour = "transparent")) + 
+  xlab("Longitude") + 
+  ylab("Latitude") +
+  ggtitle("Pink") +
+  theme(text=element_text(size=12)) +
+  scale_size(range=c(1,5), breaks=c(0.5, 20, 40, 60, 80), limits = c(0.5, 80) , guide="legend") +
+  guides(size = guide_legend(order = 1),col = guide_legend(order = 2))
+fishing_stns_pink_plot
+
+ggsave(here::here("Figures", "2022_pink_catch.jpg"), fishing_stns_pink_plot, width =200, height =110, units = "mm")
+
+#sorting by sockeye and sorting by stns that caught 0 sockeye
+fishing_stns_sockeye <- fishing_stns_cpue %>% 
+  filter(sockeye > 0 & sockeye_cpue < 80)
+  
+fishing_stns_sockeye_0 <- fishing_stns_cpue %>% 
+  filter(sockeye == 0)
+
+#filtering out stns where cpue > 80
+fishing_stns_sockeye_80_plus <- fishing_stns_cpue %>% 
+  filter(sockeye_cpue > 80)
+
+#plotting sockeye stations
+fishing_stns_sockeye_plot <- ggplot() + geom_polygon(data = pacific_map, aes(x= long, y = lat, group = group), fill = 8, color = "black") +
+  coord_cartesian(xlim = c(170, 241), ylim = c(42, 63), expand = F) +
+  scale_x_continuous(breaks = c(180, 200, 220, 240), labels = c("180°", "160°W", "140°W", "120°W")) +
+  scale_y_continuous(breaks = c(45, 50, 55, 60), labels = c("45°N", "50°N", "55°N", "60°N")) +
+  #geom_point(data=station_data_2022, aes(x=lon, y=lat), size = 0.8, shape = 1) +
+  geom_point(data=fishing_stns_sockeye, aes(x=lon, y=lat, color = vessel_name, size = sockeye_cpue)) +
+  geom_point(data=fishing_stns_sockeye_0, aes(x=lon, y=lat, color = vessel_name), shape = 4, size = 3, show.legend = FALSE) +
+  geom_point(data=fishing_stns_sockeye_80_plus, aes(x=lon, y=lat, color = vessel_name), shape = 17, size = 4, show.legend = FALSE) +
+  theme_bw() + 
+  theme(panel.grid.major = element_line(colour = "transparent"), panel.grid.minor = element_line(colour = "transparent")) + 
+  xlab("Longitude") + 
+  ylab("Latitude") +
+  ggtitle("Sockeye") +
+  theme(text=element_text(size=12)) +
+  scale_size(range=c(1,5), breaks=c(0.5, 20, 40, 60, 80), limits = c(0.5, 80) , guide="legend") +
+  guides(size = guide_legend(order = 1),col = guide_legend(order = 2))
+fishing_stns_sockeye_plot
+
+ggsave(here::here("Figures", "2022_sockeye_catch.jpg"), fishing_stns_sockeye_plot, width =200, height =110, units = "mm")
+
+#sorting by steelhead and sorting by stns that caught 0 steelhead
+fishing_stns_steelhead <- fishing_stns_cpue %>% 
+  filter(steelhead > 0 & steelhead_cpue < 80)
+  
+fishing_stns_steelhead_0 <- fishing_stns_cpue %>% 
+  filter(steelhead == 0)
+
+#filtering out stns where cpue > 80
+fishing_stns_steelhead_80_plus <- fishing_stns_cpue %>% 
+  filter(steelhead_cpue > 80)
+
+#plotting steelhead stations
+fishing_stns_steelhead_plot <- ggplot() + geom_polygon(data = pacific_map, aes(x= long, y = lat, group = group), fill = 8, color = "black") +
+  coord_cartesian(xlim = c(170, 241), ylim = c(42, 63), expand = F) +
+  scale_x_continuous(breaks = c(180, 200, 220, 240), labels = c("180°", "160°W", "140°W", "120°W")) +
+  scale_y_continuous(breaks = c(45, 50, 55, 60), labels = c("45°N", "50°N", "55°N", "60°N")) +
+  #geom_point(data=station_data_2022, aes(x=lon, y=lat), size = 0.8, shape = 1) +
+  geom_point(data=fishing_stns_steelhead, aes(x=lon, y=lat, color = vessel_name, size = steelhead_cpue)) +
+  geom_point(data=fishing_stns_steelhead_0, aes(x=lon, y=lat, color = vessel_name), shape = 4, size = 3, show.legend = FALSE) +
+  geom_point(data=fishing_stns_steelhead_80_plus, aes(x=lon, y=lat, color = vessel_name), shape = 17, size = 4, show.legend = FALSE) +
+  theme_bw() + 
+  theme(panel.grid.major = element_line(colour = "transparent"), panel.grid.minor = element_line(colour = "transparent")) + 
+  xlab("Longitude") + 
+  ylab("Latitude") +
+  ggtitle("Steelhead") +
+  theme(text=element_text(size=12)) +
+  scale_size(range=c(1,5), breaks=c(0.5, 20, 40, 60, 80), limits = c(0.5, 80) , guide="legend") +
+  guides(size = guide_legend(order = 1),col = guide_legend(order = 2))
+fishing_stns_steelhead_plot
+
+ggsave(here::here("Figures", "2022_steelhead_catch.jpg"), fishing_stns_steelhead_plot, width =200, height =110, units = "mm")
+
+#sorting by Chinook and sorting by stns that caught 0 Chinook
+fishing_stns_Chinook <- fishing_stns_cpue %>% 
+  filter(Chinook > 0 & Chinook_cpue < 80)
+  
+fishing_stns_Chinook_0 <- fishing_stns_cpue %>% 
+  filter(Chinook == 0)
+
+#filtering out stns where cpue > 80
+fishing_stns_Chinook_80_plus <- fishing_stns_cpue %>% 
+  filter(Chinook_cpue > 80)
+
+#plotting Chinook stations
+fishing_stns_Chinook_plot <- ggplot() + geom_polygon(data = pacific_map, aes(x= long, y = lat, group = group), fill = 8, color = "black") +
+  coord_cartesian(xlim = c(170, 241), ylim = c(42, 63), expand = F) +
+  scale_x_continuous(breaks = c(180, 200, 220, 240), labels = c("180°", "160°W", "140°W", "120°W")) +
+  scale_y_continuous(breaks = c(45, 50, 55, 60), labels = c("45°N", "50°N", "55°N", "60°N")) +
+  #geom_point(data=station_data_2022, aes(x=lon, y=lat), size = 0.8, shape = 1) +
+  geom_point(data=fishing_stns_Chinook, aes(x=lon, y=lat, color = vessel_name, size = Chinook_cpue)) +
+  geom_point(data=fishing_stns_Chinook_0, aes(x=lon, y=lat, color = vessel_name), shape = 4, size = 3, show.legend = FALSE) +
+  geom_point(data=fishing_stns_Chinook_80_plus, aes(x=lon, y=lat, color = vessel_name), shape = 17, size = 4, show.legend = FALSE) +
+  theme_bw() + 
+  theme(panel.grid.major = element_line(colour = "transparent"), panel.grid.minor = element_line(colour = "transparent")) + 
+  xlab("Longitude") + 
+  ylab("Latitude") +
+  ggtitle("Chinook") +
+  theme(text=element_text(size=12)) +
+  scale_size(range=c(1,5), breaks=c(0.5, 20, 40, 60, 80), limits = c(0.5, 80) , guide="legend") +
+  guides(size = guide_legend(order = 1),col = guide_legend(order = 2))
+fishing_stns_Chinook_plot
+
+ggsave(here::here("Figures", "2022_Chinook_catch.jpg"), fishing_stns_Chinook_plot, width =200, height =110, units = "mm")
+
+#sorting by coho and sorting by stns that caught 0 coho
+fishing_stns_coho <- fishing_stns_cpue %>% 
+  filter(coho > 0 & coho_cpue < 80)
+  
+fishing_stns_coho_0 <- fishing_stns_cpue %>% 
+  filter(coho == 0)
+
+#filtering out stns where cpue > 80
+fishing_stns_coho_80_plus <- fishing_stns_cpue %>% 
+  filter(coho_cpue > 80)
+
+#plotting coho stations
+fishing_stns_coho_plot <- ggplot() + geom_polygon(data = pacific_map, aes(x= long, y = lat, group = group), fill = 8, color = "black") +
+  coord_cartesian(xlim = c(170, 241), ylim = c(42, 63), expand = F) +
+  scale_x_continuous(breaks = c(180, 200, 220, 240), labels = c("180°", "160°W", "140°W", "120°W")) +
+  scale_y_continuous(breaks = c(45, 50, 55, 60), labels = c("45°N", "50°N", "55°N", "60°N")) +
+  #geom_point(data=station_data_2022, aes(x=lon, y=lat), size = 0.8, shape = 1) +
+  geom_point(data=fishing_stns_coho, aes(x=lon, y=lat, color = vessel_name, size = coho_cpue)) +
+  geom_point(data=fishing_stns_coho_0, aes(x=lon, y=lat, color = vessel_name), shape = 4, size = 3, show.legend = FALSE) +
+  geom_point(data=fishing_stns_coho_80_plus, aes(x=lon, y=lat, color = vessel_name), shape = 17, size = 4, show.legend = FALSE) +
+  theme_bw() + 
+  theme(panel.grid.major = element_line(colour = "transparent"), panel.grid.minor = element_line(colour = "transparent")) + 
+  xlab("Longitude") + 
+  ylab("Latitude") +
+  ggtitle("Coho") +
+  theme(text=element_text(size=12)) +
+  scale_size(range=c(1,5), breaks=c(0.5, 20, 40, 60, 80), limits = c(0.5, 80) , guide="legend") +
+  guides(size = guide_legend(order = 1),col = guide_legend(order = 2))
+fishing_stns_coho_plot
+
+ggsave(here::here("Figures", "2022_coho_catch.jpg"), fishing_stns_coho_plot, width =200, height =110, units = "mm")
+
+#making multi-panel plot
+grid.arrange(fishing_stns_chum_plot, fishing_stns_pink_plot, fishing_stns_sockeye_plot, fishing_stns_coho_plot, fishing_stns_Chinook_plot, fishing_stns_steelhead_plot)
+catch_spp_multipanel <- arrangeGrob(fishing_stns_chum_plot, fishing_stns_pink_plot, fishing_stns_sockeye_plot, fishing_stns_coho_plot, fishing_stns_Chinook_plot, fishing_stns_steelhead_plot, nrow = 3)
+ggsave(here::here("Figures", "2022_expedition_catch_by_spp.pdf"), catch_spp_multipanel, width =480, height =350, units = "mm")
+
+```
